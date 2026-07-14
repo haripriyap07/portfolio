@@ -15,16 +15,28 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: #0b0f19;
+  background: #0b111e;
   color: #e2e8f0;
   font-family: 'Inter', sans-serif;
 }
 
 * {
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: rgba(34, 211, 238, 0.35);
+  background: rgba(56, 189, 248, 0.35);
   color: #f8fafc;
+}
+
+/* Global Theme */
+.theme-midnight {
+  --bg-canvas: #0b111e;
+  --bg-card: #151d2a;
+  --border-subtle: #1e293b;
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --accent-sky: #38bdf8;
 }
