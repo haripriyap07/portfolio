@@ -10,6 +10,7 @@ import {
   ServerCog,
   Sparkles,
 } from 'lucide-react';
+import profileImage from './assets/profile.jpg';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
 
@@ -116,7 +117,7 @@ function App() {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(167,139,250,0.16),_transparent_45%)]" />
                 <div className="relative flex min-h-[320px] items-center justify-center overflow-hidden rounded-[16px] border border-[#1e293b] bg-[#0b0f19]">
                   <img
-                    src="src/assets/profile.jpg"
+                    src={profileImage}
                     alt="Haripriya P"
                     className="h-full w-full object-cover"
                   />
