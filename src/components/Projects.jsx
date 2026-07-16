@@ -1,4 +1,6 @@
-import { ArrowRight, Code2, ExternalLink } from 'lucide-react';
+import { ArrowRight, ExternalLink } from 'lucide-react';
+import hire from '../assets/hire.png';
+import s1 from '../assets/s1.png';
 
 const projects = [
   {
@@ -7,6 +9,7 @@ const projects = [
     stack: ['Java', 'Spring Boot', 'MySQL', 'JWT', 'Spring Security'],
     date: 'March 2025',
     link: 'https://github.com/haripriyap07/hiretrack',
+    image: hire,
     bullets: [
       'Architected a multi-role backend for USER, RECRUITER, and ADMIN flows using stateless JWT authentication, BCrypt hashing, and role-based authorization.',
       'Designed 10+ RESTful APIs for authentication, job posting, and application lifecycle management with DTO-based responses to prevent database entity over-exposure.',
@@ -19,6 +22,7 @@ const projects = [
     stack: ['Spring Boot', 'Redis', 'React', 'Docker Compose'],
     date: 'February 2025',
     link: 'https://github.com/haripriyap07/url-shortener',
+    image: s1,
     bullets: [
       'Built a full-stack URL shortener using Base62 encoding for collision-free short URL generation.',
       'Implemented a Redis cache-aside pattern for O(1) redirect lookups, reducing repeated-access database load.',
@@ -31,6 +35,7 @@ const projects = [
     stack: ['Python', 'CLIP', 'Vector Search'],
     date: 'January 2025',
     link: '#contact',
+    image: null,
     bullets: [
       'Built an image-based product retrieval system using CLIP embeddings and cosine similarity search over a fashion product dataset.',
     ],
@@ -39,7 +44,7 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-8 md:py-12">
+    <section id="projects" className="py-8 md:py-12 bg-[#0B111E]">
       <div className="space-y-12">
         {/* Section Header */}
         <div className="max-w-3xl">
@@ -53,11 +58,13 @@ export default function Projects() {
         </div>
 
         {/* Projects List */}
-        <div className="space-y-8">
+        <div className="space-y-16">
           {projects.map((project) => (
             <article
               key={project.title}
-              className="grid md:grid-cols-[1fr_1fr] gap-8 items-start group"
+              className={`grid gap-8 items-start group ${
+                project.image ? 'md:grid-cols-2' : 'grid-cols-1'
+              }`}
             >
               {/* Left Column: Text Content */}
               <div className="space-y-6">
@@ -113,15 +120,16 @@ export default function Projects() {
                 </div>
               </div>
 
-              {/* Right Column: Mockup Preview */}
-              <div className="relative w-full aspect-video rounded-2xl border border-[#1E293B] bg-[#151D2A] overflow-hidden group-hover:border-[#38bdf8] group-hover:shadow-[0_0_30px_rgba(56,189,248,0.1)] transition">
-                <div className="w-full h-full flex items-center justify-center">
-                  <div className="text-center text-[#64748B] space-y-2">
-                    <Code2 size={40} className="mx-auto opacity-50" />
-                    <p className="text-sm">Project Preview</p>
-                  </div>
+              {/* Right Column: Dynamic Image Preview */}
+              {project.image && (
+                <div className="relative w-full aspect-video rounded-2xl border border-[#1E293B] bg-[#151D2A] overflow-hidden group-hover:border-[#38bdf8] group-hover:shadow-[0_0_30px_rgba(56,189,248,0.1)] transition">
+                  <img 
+                    src={project.image} 
+                    alt={`${project.title} Showcase Mockup`}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-              </div>
+              )}
             </article>
           ))}
         </div>
