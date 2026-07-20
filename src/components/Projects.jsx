@@ -1,6 +1,7 @@
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import hire from '../assets/hire.png';
 import s1 from '../assets/s1.png';
+import p2 from '../assets/p2.png';
 
 const projects = [
   {
@@ -30,14 +31,16 @@ const projects = [
     ],
   },
   {
-    title: 'Reverse Product Search',
-    description: 'AI-powered image-based product retrieval system using CLIP embeddings and cosine similarity for fashion product matching.',
-    stack: ['Python', 'CLIP', 'Vector Search'],
-    date: 'January 2025',
-    link: '#contact',
-    image: null,
+    title: 'AI Storefront',
+    description: 'A decoupled, production-grade search application implementing OpenAI CLIP models for semantic image-to-text matching across large e-commerce collections.',
+    stack: ['Python', 'FastAPI', 'Faiss', 'PyTorch', 'Transformers', 'Streamlit'],
+    date: 'July 2026',
+    link: 'https://github.com/haripriyap07/AI-Storefront-Decoupled-Vector-Search-Engine-powered-by-CLIP-Faiss-Indexing',
+    image: p2,
     bullets: [
-      'Built an image-based product retrieval system using CLIP embeddings and cosine similarity search over a fashion product dataset.',
+      'Engineered a standalone vector indexing pipeline parsing images in batches into normalized 512-dimensional CLIP embeddings for high-speed inner product (IP) similarity comparisons.',
+      'Developed a scalable FastAPI REST server that vectorizes runtime natural language queries dynamically, using pre-computed index lookups via Faiss to minimize search latency.',
+      'Decoupled storage and serving mechanisms to isolate processing pipelines, returning comprehensive JSON metadata payloads maps to client interface elements.',
     ],
   },
 ];
