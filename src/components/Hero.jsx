@@ -1,4 +1,4 @@
-import { Download, Github, Linkedin, Mail, Twitter } from 'lucide-react';
+import { Download, Github, Linkedin, Mail } from 'lucide-react';
 
 export default function Hero({ profile, profileImage }) {
   return (
@@ -57,7 +57,8 @@ export default function Hero({ profile, profileImage }) {
               <Linkedin size={18} />
             </a>
             <a
-              href="#projects"
+              href="/Haripriya_Resume(2).pdf"
+              download="Haripriya_Resume.pdf"
               className="inline-flex items-center gap-2 ml-4 px-4 py-2 rounded-lg bg-[#151D2A] border border-[#1E293B] hover:bg-[#1E293B] text-slate-300 text-sm transition"
             >
               <Download size={16} />

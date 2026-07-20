@@ -1,4 +1,4 @@
-import { Mail, Github, Linkedin } from 'lucide-react';
+import { Mail, Github, Linkedin, CheckCircle2, AlertCircle } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Contact({ profile }) {
@@ -7,6 +7,7 @@ export default function Contact({ profile }) {
     name: '',
     message: '',
   });
+  const [status, setStatus] = useState('idle'); // idle | loading | success | error
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,11 +17,32 @@ export default function Contact({ profile }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    setFormData({ email: '', name: '', message: '' });
+    setStatus('loading');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: '8d1127b1-f819-49e8-b077-5c81ec80c327', 
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setStatus('success');
+        setFormData({ email: '', name: '', message: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      setStatus('error');
+    }
   };
 
   const contactCards = [
@@ -141,12 +163,32 @@ export default function Contact({ profile }) {
               ></textarea>
             </div>
 
+            {/* Submission Alerts */}
+            {status === 'success' && (
+              <div className="flex items-center gap-3 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm animate-fade-in">
+                <CheckCircle2 size={18} />
+                <span>Message sent successfully! I'll be in touch soon.</span>
+              </div>
+            )}
+
+            {status === 'error' && (
+              <div className="flex items-center gap-3 p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-sm animate-fade-in">
+                <AlertCircle size={18} />
+                <span>Something went wrong. Please check your setup or try again.</span>
+              </div>
+            )}
+
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full px-6 py-3 rounded-lg border border-slate-600 text-slate-300 font-medium hover:border-[#38bdf8] hover:text-[#38bdf8] hover:bg-[#38bdf8]/5 transition"
+              disabled={status === 'loading'}
+              className="w-full px-6 py-3 rounded-lg border border-slate-600 text-slate-300 font-medium hover:border-[#38bdf8] hover:text-[#38bdf8] hover:bg-[#38bdf8]/5 transition flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Send
+              {status === 'loading' ? (
+                <div className="w-5 h-5 border-2 border-[#38bdf8] border-t-transparent rounded-full animate-spin" />
+              ) : (
+                'Send'
+              )}
             </button>
           </form>
         </div>
